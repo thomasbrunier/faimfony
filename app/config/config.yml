@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@FaimfonyBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -17,7 +18,6 @@ framework:
         strict_requirements: ~
     form: ~
     csrf_protection: ~
-    validation: { enable_annotations: true }
     #serializer: { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -68,3 +68,22 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# FOSUser
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: FaimfonyBundle\Entity\User
+    from_email:
+        address: faimfony@contact.fr
+        sender_name: Faimfony
+
+easy_admin:
+    entities:
+        - FaimfonyBundle\Entity\User
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable:   true
+
