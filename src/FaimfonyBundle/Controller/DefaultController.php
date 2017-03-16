@@ -14,4 +14,13 @@ class DefaultController extends Controller
     {
         return $this->render('FaimfonyBundle:Default:index.html.twig');
     }
+
+
+
+    /**
+     * @Route("/{slug}", name="user_profil")
+     */
+    public function userProfilAction(){
+        return $this->render('FaimfonyBundle:Default:index.html.twig');
+    }
 }

@@ -77,6 +77,9 @@ fos_user:
     from_email:
         address: faimfony@contact.fr
         sender_name: Faimfony
+    registration:
+        form:
+            type: FaimfonyBundle\Form\RegistrationType
 
 easy_admin:
     entities:
