@@ -7,32 +7,12 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-use Doctrine\ORM\Mapping\AttributeOverrides;
-use Doctrine\ORM\Mapping\AttributeOverride;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- * @ORM\AttributeOverrides({
- *     @ORM\AttributeOverride(name="username",
- *          column=@ORM\Column(
- *              name="username",
- *              type="string",
- *              length=255,
- *              nullable=true
- *          )
- *      ),
- *     @ORM\AttributeOverride(name="usernameCanonical",
- *          column=@ORM\Column(
- *              name="usernameCanonical",
- *              type="string",
- *              length=255,
- *              nullable=true
- *          )
- *      )
- * })
  */
 class User extends BaseUser
 {
@@ -116,6 +96,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->setUsername($this->getEmail());
+        
         if($this->resto_name != ""){
             $this->setSlug($this->resto_name);
         }
