@@ -12,7 +12,6 @@ class UserController extends Controller
      */
     public function userProfilAction(){
 
-
-        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('profil_form'=>$form->createView()));
+        return $this->render('FaimfonyBundle:Default:editProfil.html.twig');
     }
 }

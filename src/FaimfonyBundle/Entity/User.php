@@ -58,9 +58,17 @@ class User extends BaseUser
      */
     protected $restaurants;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Meal", inversedBy="users")
+     * @ORM\JoinTable(name="users_favorites")
+     */
+    protected $favorites;
+
+
     public function __construct()
     {
         parent::__construct();
+        $this->favorites = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
     }
 
@@ -223,5 +231,39 @@ class User extends BaseUser
     public function getRestaurants()
     {
         return $this->restaurants;
+    }
+
+    /**
+     * Add favorite
+     *
+     * @param \FaimfonyBundle\Entity\Meal $favorite
+     *
+     * @return User
+     */
+    public function addFavorite(\FaimfonyBundle\Entity\Meal $favorite)
+    {
+        $this->favorites[] = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorite
+     *
+     * @param \FaimfonyBundle\Entity\Meal $favorite
+     */
+    public function removeFavorite(\FaimfonyBundle\Entity\Meal $favorite)
+    {
+        $this->favorites->removeElement($favorite);
+    }
+
+    /**
+     * Get favorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
     }
 }

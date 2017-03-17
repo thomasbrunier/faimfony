@@ -33,6 +33,7 @@ class RegistrationController extends BaseController
 
             $user = new User();
             $user->setUserType('EATER');
+            $user->setEnabled(true);
 
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);

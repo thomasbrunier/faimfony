@@ -72,11 +72,6 @@ class Restaurant
      */
     protected $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="restaurant")
-     */
-    protected $tags;
-
     public function __construct()
     {
         $this->tags = new ArrayCollection();
