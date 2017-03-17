@@ -36,6 +36,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        fos_csrf_provider: "@security.csrf.token_manager"
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
@@ -78,6 +80,8 @@ fos_user:
         address: faimfony@contact.fr
         sender_name: Faimfony
     registration:
+        confirmation:
+            enabled: false
         form:
             type: FaimfonyBundle\Form\RegistrationType
 

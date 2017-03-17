@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link href="{{ asset('assets/css/tent.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+
+    {% block stylesheets %}
+    {% endblock %}
+    <title>Layout</title>
+</head>
+<body>
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block footer %}
+    <footer>Credits & copyright</footer>
+{% endblock %}
+
+<script src="{{ asset('assets/js/jquery-3.2.0.min.js') }}" ></script>
+{% block javascripts %}
+
+{% endblock %}
+</body>
+</html>

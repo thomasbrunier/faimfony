@@ -1,5 +1,18 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
 
-{% block fos_user_content %}
-    {% include "@FOSUser/Registration/register_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block content %}
+    <h2 class="title title--xxl type-center">Connexion/Inscription</h2>
+    <div class="grid">
+        <div class="grid__column type-center">
+            <h3 class="subtitle subtitle--xl">Je suis déjà membre !</h3>
+            {% include ":FOSUserBundle/views/Security:login.html.twig" %}
+        </div>
+        <div class="grid__column type-center">
+            <h3 class="subtitle subtitle--xl">Je veux entrer dans l'équipe</h3>
+            {{ form_start(login_form) }}
+                {{ form_widget(login_form) }}
+                <button type="submit" class="button button--filled button--primary">Inscription</button>
+            {{ form_end(login_form) }}
+        </div>
+    </div>
+{% endblock %}
