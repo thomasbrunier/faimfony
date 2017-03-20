@@ -1,0 +1,20 @@
+{% if error is defined %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if fos_csrf_provider.refreshToken('authenticate') %}
+        <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.refreshToken('authenticate') }}" />
+    {% endif %}
+
+    <label for="email">E-mail:</label>
+    <input type="text" id="username" name="_username" value="{% if last_email is defined %} {{ last_email }} {% endif %}" required="required" />
+
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="_password" required="required" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">Se souvenir de moi</label>
+    <br>
+    <input class="button button--filled button--primary" type="submit" id="_submit" name="_submit" value="Connexion" />
+</form>
