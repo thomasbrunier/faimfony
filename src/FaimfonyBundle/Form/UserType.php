@@ -3,6 +3,7 @@
 namespace FaimfonyBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +14,12 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('first_name')
+        $builder->add('is_cooker', CheckboxType::class, array(
+                'label'     => 'Voulez-vous devenir un Cooker ?'
+            ))
+            ->add('first_name')
             ->add('last_name')
-            ->add('phone')
-            ->add('slug')
-            ->add('user_type');
+            ->add('phone');
     }
     
     /**

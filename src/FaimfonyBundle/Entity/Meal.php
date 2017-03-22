@@ -50,7 +50,7 @@ class Meal
     protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="meals")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="favorites")
      */
     protected $users;
 
