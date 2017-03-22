@@ -28,11 +28,6 @@ class Tag
      */
     private $name;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Meal", inversedBy="tags")
-     * @ORM\JoinColumn(name="meal_id", referencedColumnName="id")
-     */
-    protected $meal;
 
     /**
      * Get id
@@ -66,29 +61,5 @@ class Tag
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set meal
-     *
-     * @param \FaimfonyBundle\Entity\Meal $meal
-     *
-     * @return Tag
-     */
-    public function setMeal(\FaimfonyBundle\Entity\Meal $meal = null)
-    {
-        $this->meal = $meal;
-
-        return $this;
-    }
-
-    /**
-     * Get meal
-     *
-     * @return \FaimfonyBundle\Entity\Meal
-     */
-    public function getMeal()
-    {
-        return $this->meal;
     }
 }

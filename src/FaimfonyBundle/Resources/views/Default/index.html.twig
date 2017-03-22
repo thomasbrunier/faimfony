@@ -1,1 +1,26 @@
-Hello World!
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+    <section class="section-first grid">
+        <ul class="menu">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact</a></li>
+            <li class="slider"></li>
+        </ul>
+        <div class="grid__column--12 grid--center">
+            <h1 class="title__Page--welcome">Bienvenue sur Faimfony !</h1>
+        </div>
+        <div class="grid__column--12 grid--center">
+                <button id="button" class="button button--filled button--primary button--lg">J'ai faim</button>
+            <button id="button" class="button button--filled button--tertiary button--lg">Je cuisine</button>
+        </div>
+    </section>
+
+{% endblock %}
