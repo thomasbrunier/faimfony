@@ -1,9 +1,19 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
 {% block content %}
     <h2 class="title title--xxl type-center">Editer mon profil</h2>
+    <div class="block-options">
+        <a href="{{ path('user_profil') }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>
+        {% endif %}
+    </div>
     <div class="type-center">
         {% if app.session.flashBag.has('notice') %}
-
+            <div class="alert-msg">
+            {% for msg in app.session.flashBag.get('notice') %}
+                {{ msg }}
+            {% endfor %}
+            </div>
         {% endif %}
         {{ form_start(user_form) }}
             {{ form_widget(user_form) }}

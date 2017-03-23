@@ -1,6 +1,13 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
 {% block content %}
     <h4 class="title title--xxl type-center">Bienvenue {{ user.getFirstname() }}</h4>
+    <div class="block-options">
+        <a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>
+        {% endif %}
+    </div>
+
     <div class="block-search">
         <h5 class="title title--md type-center">J'ai faim!</h5>
 
