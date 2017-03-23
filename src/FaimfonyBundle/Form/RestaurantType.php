@@ -21,10 +21,10 @@ class RestaurantType extends AbstractType
             //->add('timetable',TimeType::class, array('label'=>'Horaires'))
         $dayArray = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi','dimanche'];
                 foreach ($dayArray as $day) {
-                    $builder->add($day.'-ouverture',TimeType::class, array(
-                        'mapped' => false,
+                    $builder->add($day.':ouverture',TimeType::class, array(
+                        'mapped' => false, 
                     ));
-                    $builder->add($day.'-fermeture',TimeType::class, array(
+                    $builder->add($day.':fermeture',TimeType::class, array(
                         'mapped'=>false,
                     ));
                 }
