@@ -32,7 +32,6 @@ class RegistrationController extends BaseController
             $dispatcher = $this->container->get('event_dispatcher');
 
             $user = new User();
-            $user->setUserType('EATER');
             $user->setEnabled(true);
 
             $event = new GetResponseUserEvent($user, $request);
