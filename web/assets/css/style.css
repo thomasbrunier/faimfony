@@ -98,3 +98,10 @@ li.slider {
     left: 75%;
     background-color: #16a085;
 }
+
+#faimfonybundle_user input{
+    margin:auto;
+}
+.button {
+    margin-top:10px;
+}

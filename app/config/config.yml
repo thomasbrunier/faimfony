@@ -88,6 +88,10 @@ fos_user:
 easy_admin:
     entities:
         - FaimfonyBundle\Entity\User
+        - FaimfonyBundle\Entity\Image
+        - FaimfonyBundle\Entity\Restaurant
+        - FaimfonyBundle\Entity\Meal
+        - FaimfonyBundle\Entity\Tag
 
 stof_doctrine_extensions:
     orm:

@@ -28,8 +28,8 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()){
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -37,10 +37,7 @@ class UserController extends Controller
             $session->getFlashBag()->add('notice', 'Profil mis à jour');
 
 
-            return $this->redirect($this->generateUrl(
-               'user_edit',
-                array()
-            ));
+            return $this->redirect($this->generateUrl('user_edit'));
         }
 
 

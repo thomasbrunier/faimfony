@@ -55,7 +55,7 @@ class Meal
     protected $users;
 
     /**
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     protected $image;
