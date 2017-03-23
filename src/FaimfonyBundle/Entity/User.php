@@ -49,9 +49,9 @@ class User extends BaseUser
     protected $slug;
 
     /**
-     * @ORM\Column(name="user_type", type="string", length=255)
+     * @ORM\Column(name="user_type", type="boolean")
      */
-    protected $user_type;
+    protected $is_cooker;
 
     /**
      * @ORM\OneToMany(targetEntity="Restaurant", mappedBy="user")
@@ -168,30 +168,6 @@ class User extends BaseUser
         return $this->slug;
     }
 
-    /**
-     * Set userType
-     *
-     * @param string $userType
-     *
-     * @return User
-     */
-    public function setUserType($userType)
-    {
-        $this->user_type = $userType;
-
-        return $this;
-    }
-
-    /**
-     * Get userType
-     *
-     * @return string
-     */
-    public function getUserType()
-    {
-        return $this->user_type;
-    }
-
     public function setEmail($email)
     {
         $this->setUsername($email);
@@ -265,5 +241,29 @@ class User extends BaseUser
     public function getFavorites()
     {
         return $this->favorites;
+    }
+
+    /**
+     * Set isCooker
+     *
+     * @param boolean $isCooker
+     *
+     * @return User
+     */
+    public function setIsCooker($isCooker)
+    {
+        $this->is_cooker = $isCooker;
+
+        return $this;
+    }
+
+    /**
+     * Get isCooker
+     *
+     * @return boolean
+     */
+    public function getIsCooker()
+    {
+        return $this->is_cooker;
     }
 }
