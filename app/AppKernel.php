@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FaimfonyBundle\FaimfonyBundle(),
         ];
