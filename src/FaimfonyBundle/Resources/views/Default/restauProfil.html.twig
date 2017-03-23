@@ -12,11 +12,11 @@
         <h5 class="title title--md type-center">Les infos</h5>
 
         <p>{{ id }}</p>
-        <img src="{{ urlPhoto }}">
-        <p>{{ name }}</p>
-        <p>{{ address }}</p>
-        <p>{{ timetable }}</p>
-        <p>{{ phone }}</p>
+        <img src="{{ restau.urlPhoto }}">
+        <p>{{ restau.name }}</p>
+        <p>{{ restau.address }}</p>
+        <p>{{ restau.timetable }}</p>
+        <p>{{ restau.phone }}</p>
 
         {% if userIsOwner %}
             <a href="">Editer</a>

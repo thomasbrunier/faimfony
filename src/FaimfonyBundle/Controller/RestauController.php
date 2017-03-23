@@ -31,20 +31,17 @@ public function restauAction(){
 
 //        $restau = $this->getRestau($id);
 
-//        $urlPhoto   = $restau->getUrlPhoto;
-//        $name       = $restau->getName;
-//        $address    = $restau->getAdress;
-//        $timetable  = $restau->getTimetable;
-//        $phone      = $restau->getPhone;
-//        $mealsList  = $restau->getMealsList;
-
-        $urlPhoto   = "http://placehold.it/1280x840";
-        $name       = 'La buvette';
-        $address    = "100, rue de l'adresse";
         $timetable  = "{}";
-        $phone      = '1234567890';
         $mealsList  = [];
 
+        $restau = [
+            'urlPhoto'=>"http://placehold.it/1280x840",
+            'name'=>'La buvette',
+            'address'=>"100, rue de l'adresse",
+            'timetable'=>$timetable,
+            'phone'=>'1234567890',
+            'mealsList'=>$mealsList
+        ];
 
         $user = $this->getUser();
         if($user != null){
@@ -58,12 +55,7 @@ public function restauAction(){
         return $this->render('FaimfonyBundle:Default:restauProfil.html.twig', array(
             'id'=>$id,
             'userIsOwner'=>$userIsOwner,
-            'urlPhoto'=>$urlPhoto,
-            'name'=>$name,
-            'address'=>$address,
-            'timetable'=>$timetable,
-            'phone'=>$phone,
-            'mealsList'=>$mealsList
+            'restau'=>$restau
         ));
     }
 
