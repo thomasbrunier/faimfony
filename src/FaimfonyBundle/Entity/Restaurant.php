@@ -45,12 +45,6 @@ class Restaurant
      */
     private $timetable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cooking_type", type="string", length=255)
-     */
-    private $cookingType;
 
     /**
      * @var string
@@ -71,6 +65,12 @@ class Restaurant
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id");
      */
     protected $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $image;
 
     public function __construct()
     {
@@ -157,30 +157,6 @@ class Restaurant
     public function getTimetable()
     {
         return $this->timetable;
-    }
-
-    /**
-     * Set cookingType
-     *
-     * @param string $cookingType
-     *
-     * @return Restaurant
-     */
-    public function setCookingType($cookingType)
-    {
-        $this->cookingType = $cookingType;
-
-        return $this;
-    }
-
-    /**
-     * Get cookingType
-     *
-     * @return string
-     */
-    public function getCookingType()
-    {
-        return $this->cookingType;
     }
 
     /**

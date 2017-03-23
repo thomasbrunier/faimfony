@@ -50,9 +50,15 @@ class Meal
     protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="meals")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="favorites")
      */
     protected $users;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $image;
 
     function __construct()
     {
@@ -208,5 +214,29 @@ class Meal
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \FaimfonyBundle\Entity\Image $image
+     *
+     * @return Meal
+     */
+    public function setImage(\FaimfonyBundle\Entity\Image $image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \FaimfonyBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

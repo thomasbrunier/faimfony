@@ -3,24 +3,17 @@
 namespace FaimfonyBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('is_cooker', CheckboxType::class, array(
-                'label'     => 'Voulez-vous devenir un Cooker ?',
-                'required'  => false
-            ))
-            ->add('first_name')
-            ->add('last_name')
-            ->add('phone');
+        $builder->add('file', 'file');
     }
     
     /**
@@ -29,7 +22,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'FaimfonyBundle\Entity\User'
+            'data_class' => 'FaimfonyBundle\Entity\Image'
         ));
     }
 
@@ -38,7 +31,7 @@ class UserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'faimfonybundle_user';
+        return 'faimfonybundle_image';
     }
 
 
