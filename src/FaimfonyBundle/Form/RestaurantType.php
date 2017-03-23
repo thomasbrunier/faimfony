@@ -17,9 +17,18 @@ class RestaurantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name',TextType::class, array('label'=>'Nom du restaurant'))
-            ->add('address',TextType::class, array('label'=>'Adresse'))
-            ->add('timetable',TimeType::class, array('label'=>'Horaires'))
-            ->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'));
+            ->add('address',TextType::class, array('label'=>'Adresse'));
+            //->add('timetable',TimeType::class, array('label'=>'Horaires'))
+        $dayArray = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi','dimanche'];
+                foreach ($dayArray as $day) {
+                    $builder->add($day.'-ouverture',TimeType::class, array(
+                        'mapped' => false,
+                    ));
+                    $builder->add($day.'-fermeture',TimeType::class, array(
+                        'mapped'=>false,
+                    ));
+                }
+            $builder->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'));
 
     }
     
