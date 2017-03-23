@@ -1,0 +1,24 @@
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{% block content %}
+    <h4 class="title title--xxl type-center">Bienvenue {{ user.getFirstname() }}</h4>
+    <div class="block-search">
+        <h5 class="title title--md type-center">J'ai faim!</h5>
+
+
+    </div>
+    <div class="block-favoris">
+        <h5 class="title title--md type-center">Mes favoris</h5>
+
+    </div>
+    <div class="block-bestmeal">
+        <h5 class="title title--md type-center">Les meilleurs plats</h5>
+
+    </div>
+    {% if user.getIsCooker() %}
+    <div class="block-myrestaurants">
+        <h5 class="title title--md type-center">Mes restaurants</h5>
+    </div>
+    {% endif %}
+
+{% endblock %}
+

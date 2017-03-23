@@ -1,6 +1,15 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
 {% block content %}
-    <h2 class="title title--xxl type-center">Mon profil</h2>
+    <h2 class="title title--xxl type-center">Editer mon profil</h2>
+    <div class="type-center">
+        {% if app.session.flashBag.has('notice') %}
+
+        {% endif %}
+        {{ form_start(user_form) }}
+            {{ form_widget(user_form) }}
+            <button type="submit" class="button button--filled button--primary">Enregistrer</button>
+        {{ form_end(user_form) }}
+
     </div>
 {% endblock %}
 

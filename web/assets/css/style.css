@@ -99,7 +99,6 @@ li.slider {
     background-color: #16a085;
 }
 
-
 /*----------------------
   PAGE RESTAURANT
   ----------------------*/
@@ -116,4 +115,10 @@ select {
 
 .inline_time {
     display: inline-block;
+}
+#faimfonybundle_user input{
+    margin:auto;
+}
+.button {
+    margin-top:10px;
 }
