@@ -85,7 +85,6 @@ fos_user:
         form:
             type: FaimfonyBundle\Form\RegistrationType
 
-
 stof_doctrine_extensions:
     orm:
         default:
