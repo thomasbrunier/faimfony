@@ -1,0 +1,47 @@
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{% block content %}
+    {#<div class="block-options">#}
+        {#<a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i></a>#}
+        {#{% if is_granted('ROLE_ADMIN') %}#}
+            {#<a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>#}
+        {#{% endif %}#}
+    {#</div>#}
+
+
+    <div class="block-infos-restau">
+        <h5 class="title title--md type-center">Les infos</h5>
+
+        <p>{{ id }}</p>
+        <img src="{{ urlPhoto }}">
+        <p>{{ name }}</p>
+        <p>{{ address }}</p>
+        <p>{{ timetable }}</p>
+        <p>{{ phone }}</p>
+
+        {% if userIsOwner %}
+            <a href="">Editer</a>
+        {% endif %}
+
+    </div>
+
+    <div class="block-meals">
+        <h5 class="title title--md type-center">Mes plats</h5>
+
+        {#<p>{{ mealsList }}</p>#}
+
+        {#{% for %}#}
+
+            {#
+            Controller: récupérer les plats de ce restau dans un tableau.
+            View: boucle dans le tableau.
+            #}
+
+
+
+        {#{% endfor %}#}
+
+    </div>
+
+
+{% endblock %}
+
