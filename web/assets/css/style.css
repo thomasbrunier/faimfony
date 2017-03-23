@@ -98,3 +98,22 @@ li.slider {
     left: 75%;
     background-color: #16a085;
 }
+
+
+/*----------------------
+  PAGE RESTAURANT
+  ----------------------*/
+
+select {
+
+    display: inline-block;
+}
+
+#faimfonybundle_restaurant_name, #faimfonybundle_restaurant_address, #faimfonybundle_restaurant_phone {
+    margin:auto;
+}
+
+
+.inline_time {
+    display: inline-block;
+}
