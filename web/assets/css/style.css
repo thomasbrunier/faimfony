@@ -122,3 +122,11 @@ select {
 .button {
     margin-top:10px;
 }
+
+.block-options{
+    font-size:2em;
+    right:0;
+    top:10px;
+    margin-right: 20px;
+    position: absolute;
+}
