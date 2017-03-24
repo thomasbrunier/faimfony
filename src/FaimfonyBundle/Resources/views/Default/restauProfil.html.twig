@@ -12,7 +12,7 @@
         <h5 class="title title--md type-center">Les infos</h5>
 
         <p>{{ id }}</p>
-        <img src="{{ restau.urlPhoto }}">
+        {#<img src="{{ restau.urlPhoto }}">#}
         <p>{{ restau.name }}</p>
         <p>{{ restau.address }}</p>
         <p>{{ restau.timetable }}</p>
@@ -26,25 +26,30 @@
 
     <pre>
 
-        {{ dump(restaus) }}
+        {{ dump(meals) }}
 
     </pre>
 
     <div class="block-meals">
         <h5 class="title title--md type-center">Mes plats</h5>
 
-        {#<p>{{ mealsList }}</p>#}
-
-        {#{% for %}#}
-
-            {#
-            Controller: récupérer les plats de ce restau dans un tableau.
-            View: boucle dans le tableau.
-            #}
+        <div class="grid">
 
 
+            {% for meal in meals %}
 
-        {#{% endfor %}#}
+                <div class="grid__column grid__column--4 bg-color-primary">
+                    <p>{{ meal.name }}</p>
+                    <p>{{ meal.id }}</p>
+                    <a href="/meal/edit/{{ meal.id }}">Edit</a>
+                </div>
+
+
+
+            {% endfor %}
+        </div>
+
+        <a href="/meal/create">Ajouter un plat</a>
 
     </div>
 

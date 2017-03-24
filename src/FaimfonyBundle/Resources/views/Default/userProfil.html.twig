@@ -22,9 +22,31 @@
 
     </div>
     {% if user.getIsCooker() %}
-    <div class="block-myrestaurants">
-        <h5 class="title title--md type-center">Mes restaurants</h5>
-    </div>
+        <div class="block-myrestaurants">
+            <h5 class="title title--md type-center">Mes restaurants</h5>
+
+            <div class="grid">
+
+
+                {% for restau in restaus %}
+
+                        <div class="grid__column grid__column--4 bg-color-primary">
+                            <p>{{ restau.name }}</p>
+                            <p>{{ restau.id }}</p>
+                            <a href="/restaurant/{{ restau.id }}">Voir</a>
+                        </div>
+
+
+
+                {% endfor %}
+            </div>
+
+            <pre>
+
+        {{ dump(restaus) }}
+
+    </pre>
+        </div>
     {% endif %}
 
 {% endblock %}
