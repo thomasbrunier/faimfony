@@ -130,3 +130,17 @@ select {
     margin-right: 20px;
     position: absolute;
 }
+
+#mastHead .navbar {
+    border-radius: 0;
+}
+
+#mastFooter {
+    margin-top: 30px;
+    padding-top:30px;
+    padding-bottom:30px;
+}
+
+#mastFooter p {
+    margin-bottom: 0;
+}
