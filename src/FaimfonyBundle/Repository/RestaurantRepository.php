@@ -10,20 +10,4 @@ namespace FaimfonyBundle\Repository;
  */
 class RestaurantRepository extends \Doctrine\ORM\EntityRepository
 {
-
-//    public function findByUserId($userId)
-//    {
-//
-////        $qb = $this->getEntityManager()->createQueryBuilder();
-//        $qb = $this->getEntityManager()->createQueryBuilder();
-//
-//        $qb->select('u')
-//            ->from('\namespace\for\User', 'u')
-//            ->join('u.roles', 'r')
-//            ->where(...);
-//
-//        return $qb->getQuery()->getResult();
-//
-//    }
-
 }

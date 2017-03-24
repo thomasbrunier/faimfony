@@ -56,24 +56,24 @@ class RestauController extends Controller
         $restau = $restauRepository->find($id);
 
         $MealRepository = $this->getDoctrine()->getRepository(Meal::class);
-//        $meals = $MealRepository->findByRestau($id);
+        $meals = $MealRepository->findByRestaurant($id);
 
-        $meals = [
-            'meal1' => [
-                'description' => '',
-                'id' => '1',
-                'image_id' => '',
-                'name' => 'burger',
-                'price' => ''
-            ],
-            'meal2' => [
-                'description' => '',
-                'id' => '2',
-                'image_id' => '',
-                'name' => 'salade',
-                'price' => ''
-            ]
-        ];
+//        $meals = [
+//            'meal1' => [
+//                'description' => '',
+//                'id' => '1',
+//                'image_id' => '',
+//                'name' => 'burger',
+//                'price' => ''
+//            ],
+//            'meal2' => [
+//                'description' => '',
+//                'id' => '2',
+//                'image_id' => '',
+//                'name' => 'salade',
+//                'price' => ''
+//            ]
+//        ];
 
         $user = $this->getUser();
         if ($user != null) {
