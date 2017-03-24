@@ -29,7 +29,8 @@ class RestaurantType extends AbstractType
                         'input' => 'string'
                     ));
                 }
-            $builder->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'));
+            $builder->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'))
+            ->add('image', ImageType::class);
 
     }
     

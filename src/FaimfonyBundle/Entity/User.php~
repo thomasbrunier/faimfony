@@ -49,18 +49,26 @@ class User extends BaseUser
     protected $slug;
 
     /**
-     * @ORM\Column(name="user_type", type="string", length=255)
+     * @ORM\Column(name="user_type", type="boolean")
      */
-    protected $user_type;
+    protected $is_cooker;
 
     /**
      * @ORM\OneToMany(targetEntity="Restaurant", mappedBy="user")
      */
     protected $restaurants;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Meal", inversedBy="users")
+     * @ORM\JoinTable(name="users_favorites")
+     */
+    protected $favorites;
+
+
     public function __construct()
     {
         parent::__construct();
+        $this->favorites = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
     }
 
@@ -160,30 +168,6 @@ class User extends BaseUser
         return $this->slug;
     }
 
-    /**
-     * Set userType
-     *
-     * @param string $userType
-     *
-     * @return User
-     */
-    public function setUserType($userType)
-    {
-        $this->user_type = $userType;
-
-        return $this;
-    }
-
-    /**
-     * Get userType
-     *
-     * @return string
-     */
-    public function getUserType()
-    {
-        return $this->user_type;
-    }
-
     public function setEmail($email)
     {
         $this->setUsername($email);
@@ -223,5 +207,63 @@ class User extends BaseUser
     public function getRestaurants()
     {
         return $this->restaurants;
+    }
+
+    /**
+     * Add favorite
+     *
+     * @param \FaimfonyBundle\Entity\Meal $favorite
+     *
+     * @return User
+     */
+    public function addFavorite(\FaimfonyBundle\Entity\Meal $favorite)
+    {
+        $this->favorites[] = $favorite;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorite
+     *
+     * @param \FaimfonyBundle\Entity\Meal $favorite
+     */
+    public function removeFavorite(\FaimfonyBundle\Entity\Meal $favorite)
+    {
+        $this->favorites->removeElement($favorite);
+    }
+
+    /**
+     * Get favorites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * Set isCooker
+     *
+     * @param boolean $isCooker
+     *
+     * @return User
+     */
+    public function setIsCooker($isCooker)
+    {
+        $this->is_cooker = $isCooker;
+
+        return $this;
+    }
+
+    /**
+     * Get isCooker
+     *
+     * @return boolean
+     */
+    public function getIsCooker()
+    {
+        return $this->is_cooker;
     }
 }

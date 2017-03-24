@@ -68,7 +68,6 @@ class Restaurant
 
     /**
      * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
      */
     protected $image;
 
@@ -263,5 +262,29 @@ class Restaurant
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \FaimfonyBundle\Entity\Image $image
+     *
+     * @return Restaurant
+     */
+    public function setImage(\FaimfonyBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \FaimfonyBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

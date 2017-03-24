@@ -34,11 +34,9 @@ class RestauController extends Controller
             //array_push($timetableArray ,$form->get($day.':fermeture')->getData());
 
         }
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid()){
             $timetableArray = json_encode($timetableArray);
             $restaurant->setTimetable($timetableArray);
-            dump($timetableArray);
-            die();
             $em = $this->getDoctrine()->getManager();
             $em->persist($restaurant);
             $em->flush();
