@@ -20,6 +20,7 @@
         "javiereguiluz/easyadmin-bundle": "^1.16",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
+        "sonata-project/admin-bundle": "^3.14",
         "stof/doctrine-extensions-bundle": "^1.2",
         "symfony/monolog-bundle": "^3.0.2",
         "symfony/polyfill-apcu": "^1.0",

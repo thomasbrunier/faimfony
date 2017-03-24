@@ -1,0 +1,58 @@
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{% block content %}
+    {#<div class="block-options">#}
+        {#<a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i></a>#}
+        {#{% if is_granted('ROLE_ADMIN') %}#}
+            {#<a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>#}
+        {#{% endif %}#}
+    {#</div>#}
+
+
+    <div class="block-infos-restau">
+        <h5 class="title title--md type-center">Les infos</h5>
+
+        <p>{{ id }}</p>
+        {#<img src="{{ restau.urlPhoto }}">#}
+        <p>{{ restau.name }}</p>
+        <p>{{ restau.address }}</p>
+        <p>{{ restau.timetable }}</p>
+        <p>{{ restau.phone }}</p>
+
+        {% if userIsOwner %}
+            <a href="/restaurant/edit/{{ id }}">Editer</a>
+        {% endif %}
+
+    </div>
+
+    <pre>
+
+        {{ dump(meals) }}
+
+    </pre>
+
+    <div class="block-meals">
+        <h5 class="title title--md type-center">Mes plats</h5>
+
+        <div class="grid">
+
+
+            {% for meal in meals %}
+
+                <div class="grid__column grid__column--4 bg-color-primary">
+                    <p>{{ meal.name }}</p>
+                    <p>{{ meal.id }}</p>
+                    <a href="/meal/edit/{{ meal.id }}">Edit</a>
+                </div>
+
+
+
+            {% endfor %}
+        </div>
+
+        <a href="/meal/create">Ajouter un plat</a>
+
+    </div>
+
+
+{% endblock %}
+

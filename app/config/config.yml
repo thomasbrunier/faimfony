@@ -7,7 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
@@ -36,6 +36,8 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        fos_csrf_provider: "@security.csrf.token_manager"
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
@@ -77,10 +79,11 @@ fos_user:
     from_email:
         address: faimfony@contact.fr
         sender_name: Faimfony
-
-easy_admin:
-    entities:
-        - FaimfonyBundle\Entity\User
+    registration:
+        confirmation:
+            enabled: false
+        form:
+            type: FaimfonyBundle\Form\RegistrationType
 
 stof_doctrine_extensions:
     orm:
