@@ -45,7 +45,8 @@ class Meal
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="meal")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="meals")
+     * @ORM\JoinTable(name="meals_tags")
      */
     protected $tags;
 

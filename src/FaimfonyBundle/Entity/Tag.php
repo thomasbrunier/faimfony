@@ -29,8 +29,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Meal", inversedBy="tags")
-     * @ORM\JoinColumn(name="meal_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Meal", inversedBy="tags")
      */
     protected $meal;
 
