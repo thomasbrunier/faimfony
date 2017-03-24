@@ -18,17 +18,19 @@ class RestaurantType extends AbstractType
     {
         $builder->add('name',TextType::class, array('label'=>'Nom du restaurant'))
             ->add('address',TextType::class, array('label'=>'Adresse'));
-            //->add('timetable',TimeType::class, array('label'=>'Horaires'))
         $dayArray = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi','dimanche'];
                 foreach ($dayArray as $day) {
                     $builder->add($day.':ouverture',TimeType::class, array(
-                        'mapped' => false, 
+                        'mapped' => false,
+                        'input' => 'string'
                     ));
                     $builder->add($day.':fermeture',TimeType::class, array(
                         'mapped'=>false,
+                        'input' => 'string'
                     ));
                 }
-            $builder->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'));
+            $builder->add('phone',NumberType::class, array('label'=>'Numéro de téléphone'))
+            ->add('image', ImageType::class);
 
     }
     

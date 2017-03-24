@@ -39,32 +39,12 @@ class Restaurant
     private $address;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="min_price", type="integer")
-     */
-    private $minPrice;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="max_price", type="integer")
-     */
-    private $maxPrice;
-
-    /**
      * @var array
      *
      * @ORM\Column(name="timetable", type="json_array")
      */
     private $timetable;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cooking_type", type="string", length=255)
-     */
-    private $cookingType;
 
     /**
      * @var string
@@ -87,9 +67,9 @@ class Restaurant
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tag", mappedBy="restaurant")
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
      */
-    protected $tags;
+    protected $image;
 
     public function __construct()
     {
@@ -155,54 +135,6 @@ class Restaurant
     }
 
     /**
-     * Set minPrice
-     *
-     * @param integer $minPrice
-     *
-     * @return Restaurant
-     */
-    public function setMinPrice($minPrice)
-    {
-        $this->minPrice = $minPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get minPrice
-     *
-     * @return int
-     */
-    public function getMinPrice()
-    {
-        return $this->minPrice;
-    }
-
-    /**
-     * Set maxPrice
-     *
-     * @param integer $maxPrice
-     *
-     * @return Restaurant
-     */
-    public function setMaxPrice($maxPrice)
-    {
-        $this->maxPrice = $maxPrice;
-
-        return $this;
-    }
-
-    /**
-     * Get maxPrice
-     *
-     * @return int
-     */
-    public function getMaxPrice()
-    {
-        return $this->maxPrice;
-    }
-
-    /**
      * Set timetable
      *
      * @param array $timetable
@@ -224,30 +156,6 @@ class Restaurant
     public function getTimetable()
     {
         return $this->timetable;
-    }
-
-    /**
-     * Set cookingType
-     *
-     * @param string $cookingType
-     *
-     * @return Restaurant
-     */
-    public function setCookingType($cookingType)
-    {
-        $this->cookingType = $cookingType;
-
-        return $this;
-    }
-
-    /**
-     * Get cookingType
-     *
-     * @return string
-     */
-    public function getCookingType()
-    {
-        return $this->cookingType;
     }
 
     /**
