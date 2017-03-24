@@ -7,6 +7,7 @@ use FaimfonyBundle\Form\RestaurantType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class RestauController extends Controller
@@ -92,15 +93,16 @@ class RestauController extends Controller
     }
 
     /**
-     * @Route("restaurant/edit/$id", name="edit_restau")
+     * @Route("restaurant/edit/{id}", name="edit_restau")
      */
 
-    public function restauEditAction(Request $request)
+    public function restauEditAction(Request $request, $id)
     {
 
-//        $session = new Session();
+       $session = new Session();
         $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
+        $form = $this->createForm(RestaurantType::class, $restaurant);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -112,11 +114,11 @@ class RestauController extends Controller
             $session->getFlashBag()->add('notice', 'Profil mis à jour');
 
 
-            return $this->redirect($this->generateUrl('user_edit'));
+            return $this->redirect($this->generateUrl('edit_restau', array('id'=>$id)));
         }
 
 
-        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user_form'=>$form->createView()));
+        return $this->render('FaimfonyBundle:Default:editRestau.html.twig', array('restau_form'=>$form->createView(), 'restaurant'=>$restaurant));
 
 
 
