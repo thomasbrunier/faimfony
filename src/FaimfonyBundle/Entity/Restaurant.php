@@ -71,9 +71,14 @@ class Restaurant
      */
     protected $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Meal", mappedBy="restaurant")
+     */
+    protected $meals;
+
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
+        $this->meals = new ArrayCollection();
     }
 
     /**
@@ -286,5 +291,39 @@ class Restaurant
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     *
+     * @return Restaurant
+     */
+    public function addMeal(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals[] = $meal;
+
+        return $this;
+    }
+
+    /**
+     * Remove meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     */
+    public function removeMeal(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals->removeElement($meal);
+    }
+
+    /**
+     * Get meals
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMeals()
+    {
+        return $this->meals;
     }
 }
