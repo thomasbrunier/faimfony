@@ -60,6 +60,12 @@ class Meal
      */
     protected $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Restaurant", inversedBy="meals")
+     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id");
+     */
+    protected $restaurant;
+
     function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -238,5 +244,29 @@ class Meal
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set restaurant
+     *
+     * @param \FaimfonyBundle\Entity\Restaurant $restaurant
+     *
+     * @return Meal
+     */
+    public function setRestaurant(\FaimfonyBundle\Entity\Restaurant $restaurant = null)
+    {
+        $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    /**
+     * Get restaurant
+     *
+     * @return \FaimfonyBundle\Entity\Restaurant
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
     }
 }

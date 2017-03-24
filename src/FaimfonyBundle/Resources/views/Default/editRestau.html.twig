@@ -1,0 +1,26 @@
+{% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{% block content %}
+    <h2 class="title title--xxl type-center">Editer mon Restaurant : {{ restaurant.name }}</h2>
+    <div class="block-options">
+        <a href="{{ path('user_profil') }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>
+        {% endif %}
+    </div>
+    <div class="type-center">
+        {% if app.session.flashBag.has('notice') %}
+            <div class="alert-msg">
+            {% for msg in app.session.flashBag.get('notice') %}
+                {{ msg }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {{ form_start(restau_form) }}
+            {{ form_widget(restau_form) }}
+            <img src="{{ asset(restaurant.image.url) }}" class="card__image">
+            <button type="submit" class="button button--filled button--primary">Enregistrer</button>
+        {{ form_end(restau_form) }}
+
+    </div>
+{% endblock %}
+
