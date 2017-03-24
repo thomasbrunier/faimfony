@@ -57,7 +57,7 @@ class Image
         }
 
         //Stock l'extension du fichier
-        $this->url = $this->file->guessExtension();
+        $this->url = $this->getUploadDir().$this->file->getClientOriginalName();
 
         //Génère l'attribut alt avec la valeur du nom du fichier
         $this->alt = $this->file->getClientOriginalName();
