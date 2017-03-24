@@ -2,6 +2,7 @@
 
 namespace FaimfonyBundle\Controller;
 
+use FaimfonyBundle\Entity\Restaurant;
 use FaimfonyBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,7 +17,13 @@ class UserController extends Controller
     public function userProfilAction(Request $request) {
 
         $user = $this->getUser();
-        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user));
+        $userId = $user->getId();
+
+        $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
+        $restaus = $restauRepository->findByUser($userId);
+
+
+        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus));
     }
 
     /**
