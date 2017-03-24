@@ -52,9 +52,6 @@ class RestauController extends Controller
     public function profilRestauAction($id)
     {
 
-//        $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
-//        $restaus = $restauRepository->findAll();
-
         $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
         $restau = $restauRepository->find($id);
 
@@ -78,20 +75,6 @@ class RestauController extends Controller
             ]
         ];
 
-//        $restau = new Restaurant();
-
-//        $timetable  = "{}";
-//        $mealsList  = [];
-
-//        $restau = [
-//            'urlPhoto'=>"http://placehold.it/1280x840",
-//            'name'=>'La buvette',
-//            'address'=>"100, rue de l'adresse",
-//            'timetable'=>$timetable,
-//            'phone'=>'1234567890',
-//            'mealsList'=>$mealsList
-//        ];
-
         $user = $this->getUser();
         if ($user != null) {
 //            If restau belongs to user
@@ -107,5 +90,39 @@ class RestauController extends Controller
             'meals' => $meals
         ));
     }
+
+    /**
+     * @Route("restaurant/edit/$id", name="edit_restau")
+     */
+
+    public function restauEditAction(Request $request)
+    {
+
+//        $session = new Session();
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $session->getFlashBag()->add('notice', 'Profil mis à jour');
+
+
+            return $this->redirect($this->generateUrl('user_edit'));
+        }
+
+
+        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user_form'=>$form->createView()));
+
+
+
+//        return $this->render('FaimfonyBundle:Default:restaurantFormulaire.html.twig', array('form' => $form->createView()
+//        ));
+    }
+
 
 }
