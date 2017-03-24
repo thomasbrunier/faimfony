@@ -29,7 +29,10 @@ public function restauAction(){
 
     public function profilRestauAction($id){
 
-//        $restau = $this->getRestau($id);
+        $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
+        $restaus = $restauRepository->findAll();
+
+//        $restau = new Restaurant();
 
         $timetable  = "{}";
         $mealsList  = [];
@@ -55,7 +58,8 @@ public function restauAction(){
         return $this->render('FaimfonyBundle:Default:restauProfil.html.twig', array(
             'id'=>$id,
             'userIsOwner'=>$userIsOwner,
-            'restau'=>$restau
+            'restau'=>$restau,
+            'restaus'=>$restaus
         ));
     }
 

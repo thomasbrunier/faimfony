@@ -10,4 +10,7 @@ namespace FaimfonyBundle\Repository;
  */
 class RestaurantRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    
+
 }
