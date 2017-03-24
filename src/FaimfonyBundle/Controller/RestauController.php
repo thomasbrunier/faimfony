@@ -33,8 +33,6 @@ public function restauAction(Request $request){
     if($form->isSubmitted() && $form->isValid()){
         $timetableArray = json_encode($timetableArray);
         $restaurant->setTimetable($timetableArray);
-        dump($timetableArray);
-        die();
         $em = $this->getDoctrine()->getManager();
         $em->persist($restaurant);
         $em->flush();
