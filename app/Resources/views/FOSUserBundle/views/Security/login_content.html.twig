@@ -9,12 +9,12 @@
 
     <label for="email">E-mail:</label>
     <input type="text" id="username" name="_username" value="{% if last_email is defined %} {{ last_email }} {% endif %}" required="required" />
-
+<br>
     <label for="password">Mot de passe:</label>
     <input type="password" id="password" name="_password" required="required" />
-
+<br>
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">Se souvenir de moi</label>
     <br>
-    <input class="button button--filled button--primary" type="submit" id="_submit" name="_submit" value="Connexion" />
+    <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="Connexion" />
 </form>

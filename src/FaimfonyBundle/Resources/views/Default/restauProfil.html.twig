@@ -1,55 +1,61 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
 {% block content %}
     {#<div class="block-options">#}
-        {#<a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i></a>#}
-        {#{% if is_granted('ROLE_ADMIN') %}#}
-            {#<a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>#}
-        {#{% endif %}#}
+    {#<a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i></a>#}
+    {#{% if is_granted('ROLE_ADMIN') %}#}
+    {#<a href="{{ path('admin ') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>#}
+    {#{% endif %}#}
     {#</div>#}
 
 
-    <div class="block-infos-restau">
-        <h5 class="title title--md type-center">Les infos</h5>
 
-        <p>{{ id }}</p>
+    <h1>Fiche Resto</h1>
+
+    <div class="block-infos-restau">
+        <h2 class="page-header">Infos</h2>
+
         {#<img src="{{ restau.urlPhoto }}">#}
-        <p>{{ restau.name }}</p>
-        <p>{{ restau.address }}</p>
-        <p>{{ restau.timetable }}</p>
+        <h3>{{ restau.name }}</h3>
+        <address>{{ restau.address }}</address>
         <p>{{ restau.phone }}</p>
+        <p>{{ restau.timetable }}</p>
 
         {% if userIsOwner %}
-            <a href="/restaurant/edit/{{ id }}">Editer</a>
+            <a class="btn btn-primary" href="/restaurant/edit/{{ id }}">Editer</a>
         {% endif %}
 
     </div>
 
-    <pre>
-
-        {{ dump(meals) }}
-
-    </pre>
-
     <div class="block-meals">
-        <h5 class="title title--md type-center">Mes plats</h5>
+        <h2 class="page-header">Plats</h2>
 
-        <div class="grid">
+        <div class="row">
 
 
             {% for meal in meals %}
 
-                <div class="grid__column grid__column--4 bg-color-primary">
-                    <p>{{ meal.name }}</p>
-                    <p>{{ meal.id }}</p>
-                    <a href="/meal/edit/{{ meal.id }}">Edit</a>
+
+                <div class="col-sm-6 col-md-4">
+                    <div id="meal-{{ meal.id }}" class="thumbnail">
+                        <img src="http://placehold.it/350x150" alt="...">
+                        <div class="caption">
+                            <h3>{{ meal.name }}</h3>
+                            <p>...</p>
+                            <p><a href="/meal/edit/{{ meal.id }}" class="btn btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a></p>
+                        </div>
+                    </div>
                 </div>
 
 
-
             {% endfor %}
+
+            <div class="col-sm-6 col-md-4">
+
+                <a class="btn btn-default btn-lg btn-block" href="/meal/create/{{ id }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un plat</a>
+            </div>
+
         </div>
 
-        <a href="/meal/create/{{ id }}">Ajouter un plat</a>
 
     </div>
 

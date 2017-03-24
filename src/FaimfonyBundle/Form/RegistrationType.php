@@ -11,7 +11,7 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('is_cooker', CheckboxType::class, array(
-            'label'     => 'Voulez-vous devenir un Cooker ?',
+            'label'     => 'Vous êtes un Cooker ?',
             'required'  => false
             ))
             ->add('email', null, array('label'=>'Votre e-mail:'))
