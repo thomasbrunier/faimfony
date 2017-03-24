@@ -90,3 +90,7 @@ stof_doctrine_extensions:
         default:
             sluggable:   true
 
+easy_admin:
+    entities:
+        - FaimfonyBundle\Entity\User
+
