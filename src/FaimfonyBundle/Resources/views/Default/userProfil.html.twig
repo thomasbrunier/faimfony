@@ -20,18 +20,26 @@
     {% if user.getIsCooker() %}
         <div class="block-myrestaurants">
             <h2 class="page-header">Mes restaurants</h2>
-
+            {% if app.session.flashBag.has('notice') %}
+                <div class="alert alert-success">
+                    {% for msg in app.session.flashBag.get('notice') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="row">
 
                 {% for restau in restaus %}
 
                     <div class="col-sm-6 col-md-4">
                         <div id="resto-{{ restau.id }}" class="thumbnail">
-                            <img src="http://placehold.it/350x150" alt="...">
+                            <img src="{{ asset(restau.image.url) }}" alt="{{ restau.image.alt }}"">
                             <div class="caption">
                                 <h3>{{ restau.name }}</h3>
                                 <p>...</p>
-                                <p><a href="/restaurant/{{ restau.id }}" class="btn btn-primary" role="button"><i class="fa fa-eye" aria-hidden="true"></i> Voir</a> <a href="/restaurant/edit/{{ restau.id }}" class="btn btn-default" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a></p>
+                                <p><a href="{{ path('profil_restau', {'id': restau.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-eye" aria-hidden="true"></i> Voir</a>
+                                    <a href="{{ path('edit_restau', {'id':restau.id}) }}" class="btn btn-default" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
+                                    <a href="{{ path('delete_restau', {'id':restau.id}) }}" class="btn btn-default" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</a></p>
                             </div>
                         </div>
                     </div>
@@ -39,7 +47,7 @@
                 {% endfor %}
 
                 <div class="col-sm-6 col-md-4">
-                    <a class="btn btn-default btn-lg btn-block" href="restaurant/create/"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un resto</a>
+                    <a class="btn btn-default btn-lg btn-block" href="{{ path('add_restau') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un resto</a>
                 </div>
 
             </div>

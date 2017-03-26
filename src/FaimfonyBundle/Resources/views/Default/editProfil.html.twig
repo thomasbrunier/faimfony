@@ -12,7 +12,7 @@
 
     <div class="text-center">
         {% if app.session.flashBag.has('notice') %}
-            <div class="alert-msg">
+            <div class="alert alert-success">
             {% for msg in app.session.flashBag.get('notice') %}
                 {{ msg }}
             {% endfor %}
