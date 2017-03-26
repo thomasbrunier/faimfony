@@ -33,6 +33,7 @@ class MealController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($meal);
             $em->flush();
+            return $this->redirect($this->generateUrl('profil_restau', array('id'=>$restau->getId())));
         }
         return $this->render('FaimfonyBundle:Default:mealFormulaire.html.twig', array('form' => $form->createView()
         ));

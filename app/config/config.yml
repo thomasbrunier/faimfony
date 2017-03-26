@@ -94,5 +94,5 @@ stof_doctrine_extensions:
 
 easy_admin:
     entities:
-        - FaimfonyBundle\Entity\User
+        - FaimfonyBundle\Entity\Restaurant
 
