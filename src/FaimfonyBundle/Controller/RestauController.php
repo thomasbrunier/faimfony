@@ -90,6 +90,7 @@ class RestauController extends Controller
             'id' => $id,
             'userIsOwner' => $userIsOwner,
             'restau' => $restau,
+            'timetable'=> json_decode($restau->getTimetable(), true),
             'meals' => $meals
         ));
     }
