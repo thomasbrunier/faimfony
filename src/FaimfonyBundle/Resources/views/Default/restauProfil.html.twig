@@ -13,13 +13,30 @@
     <div class="block-infos-restau">
         <h2 class="page-header">Infos</h2>
 
-        {#<img src="{{ restau.urlPhoto }}">#}
         <h3>{{ restau.name }}</h3>
         <address>Adresse : {{ restau.address }}</address>
         <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:{{ restau.phone  }}">{{ restau.phone }}</a></p>
         <p>
             <h5>Horaires :</h5>
-            {{ restau.timetable }}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Ouverture</th>
+                        <th>Fermeture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,value in timetable %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ value[0] }}</td>
+                            <td>{{ value[1] }}</td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </p>
 
         {% if userIsOwner %}
