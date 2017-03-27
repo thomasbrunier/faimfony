@@ -8,17 +8,19 @@
     {#</div>#}
 
 
-
+<button type="button" class="btn btn-outline-primary"><a href="{{ path('user_profil') }}"><i class="fa fa-chevron-left" aria-hidden="true"></i> Retour</a></button>
     <h1>Fiche Resto</h1>
-
     <div class="block-infos-restau">
         <h2 class="page-header">Infos</h2>
 
         {#<img src="{{ restau.urlPhoto }}">#}
         <h3>{{ restau.name }}</h3>
-        <address>{{ restau.address }}</address>
-        <p>{{ restau.phone }}</p>
-        <p>{{ restau.timetable }}</p>
+        <address>Adresse : {{ restau.address }}</address>
+        <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:{{ restau.phone  }}">{{ restau.phone }}</a></p>
+        <p>
+            <h5>Horaires :</h5>
+            {{ restau.timetable }}
+        </p>
 
         {% if userIsOwner %}
             <a class="btn btn-primary" href="/restaurant/edit/{{ id }}">Editer</a>
@@ -30,18 +32,19 @@
         <h2 class="page-header">Plats</h2>
 
         <div class="row">
-
-
             {% for meal in meals %}
 
 
                 <div class="col-sm-6 col-md-4">
                     <div id="meal-{{ meal.id }}" class="thumbnail">
-                        <img src="http://placehold.it/350x150" alt="...">
+                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}">
                         <div class="caption">
                             <h3>{{ meal.name }}</h3>
                             <p>{{ meal.description }}</p>
-                            <p><a href="/meal/edit/{{ meal.id }}" class="btn btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a></p>
+                            <p>
+                                <a href="{{ path('edit_meal', {'id':meal.id } ) }}" class="btn btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
+                                <a href="{{ path('delete_meal', {'id':meal.id}) }}" class="btn btn-danger" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</a></p>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +54,7 @@
 
             <div class="col-sm-6 col-md-4">
 
-                <a class="btn btn-default btn-lg btn-block" href="/meal/create/{{ id }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un plat</a>
+                <a class="btn btn-default btn-lg btn-block" href="{{ path('add_meal', {'id':restau.id}) }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un plat</a>
             </div>
 
         </div>
