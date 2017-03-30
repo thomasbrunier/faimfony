@@ -4,6 +4,14 @@
 
     {#<h1>Bienvenue {{ user.getFirstname() }}</h1>#}
 
+    {% if app.session.flashBag.has('notice') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('notice') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="block-search">
         <h2 class="page-header">J'ai faim!</h2>
         {% if form is defined %}
@@ -20,6 +28,10 @@
                             <h4>{{ meal.name }}</h4>
                             <p>{{ meal.description }}</p>
                             <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
+                                {% if not meal in app.user.favorites %}
+                                    <a href="{{ path('add_favorite', {'id': meal.id} ) }}" style="background-color:#a0950a;border-color:#a0950a" class="btn btn-primary" role="button"><i class="fa fa-star" aria-hidden="true"></i> Ajouter aux favoris </a>
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
                 {% endfor %}
@@ -34,11 +46,20 @@
     </div>
     <div class="block-favoris">
         <h2 class="page-header">Mes favoris</h2>
-
-    </div>
-    <div class="block-bestmeal">
-        <h2 class="page-header">Les meilleurs plats</h2>
-
+        <div class="row">
+            {% for meal in app.user.favorites %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}"">
+                        <h4>{{ meal.name }}</h4>
+                        <p>{{ meal.description }}</p>
+                        <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
+                            <a href="{{ path('delete_favorite', {'id': meal.id} ) }}" style="background-color:red;border-color:red;" class="btn btn-primary" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer le favoris</a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     {% if user.getIsCooker() %}
         <div class="block-myrestaurants">

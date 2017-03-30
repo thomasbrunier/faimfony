@@ -22,22 +22,21 @@ class UserController extends Controller
         $userId = $user->getId();
         $meal = new Meal();
         $form = $this->createForm(UserMealType::class, $meal);
-
-
+        $favorites = $user->getFavorites();
         $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
         $restaus = $restauRepository->findByUser($userId);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-//            dump($meal->getTags()[1]->getName());
+
             $mealRepo = $this->getDoctrine()->getRepository(Meal::class);
             $meals = $mealRepo->userFindMeal($meal->getPrice(), $meal->getTags());
 
 
-            return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'meals'=>$meals));
+            return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'meals'=>$meals, 'favorites'=>$favorites));
         }
 
-        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView()));
+        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView(),'favorites'=>$favorites));
     }
 
     /**
@@ -47,7 +46,6 @@ class UserController extends Controller
         $session = new Session();
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 

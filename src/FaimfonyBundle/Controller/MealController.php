@@ -77,4 +77,35 @@ class MealController extends Controller
         }
     }
 
+    /**
+     * @Route("/add-favorite/{id}", name="add_favorite")
+     */
+    public function addMealFavorite(Request $request, $id){
+        $session = new Session();
+        $meal = $this->getDoctrine()->getRepository(Meal::class)->find($id);
+        $user = $this->getUser();
+        $user->addFavorite($meal);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        $session->getFlashBag()->add('notice', 'Le plat à été ajouté aux favoris!');
+        return $this->redirect($this->generateUrl('user_profil'));
+    }
+
+    /**
+     * @Route("/delete-favorite/{id}", name="delete_favorite")
+     */
+    public function deleteMealFavorite(Request $request, $id){
+        $session = new Session();
+        $meal = $this->getDoctrine()->getRepository(Meal::class)->find($id);
+        $user = $this->getUser();
+        $user->removeFavorite($meal);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        $session->getFlashBag()->add('notice', 'Le plat à été supprimé des favoris!');
+        return $this->redirect($this->generateUrl('user_profil'));
+    }
+
+
 }
