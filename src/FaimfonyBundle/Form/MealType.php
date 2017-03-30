@@ -2,6 +2,8 @@
 
 namespace FaimfonyBundle\Form;
 
+use FaimfonyBundle\Form\TagsType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
@@ -19,6 +21,7 @@ class MealType extends AbstractType
             ->add('name', TextType::class, array('label' => 'Nom du plat'))
             ->add('description', TextType::class, array('label' => 'Description du plat'))
             ->add('price', MoneyType::class, array('label' => 'Prix du plat', 'divisor' => 100))
+            ->add('tags', TagsType::class)
             ->add('image', ImageType::class);
     }
 

@@ -32,14 +32,13 @@
                             <td>{{ key }}</td>
                             <td>{{ value[0] }}</td>
                             <td>{{ value[1] }}</td>
-
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </p>
 
-        {% if userIsOwner %}
+        {% if app.user == restau.user %}
             <a class="btn btn-primary" href="/restaurant/edit/{{ id }}">Editer</a>
         {% endif %}
 
@@ -54,14 +53,24 @@
 
                 <div class="col-sm-6 col-md-4">
                     <div id="meal-{{ meal.id }}" class="thumbnail">
-                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}">
+                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}" style="height:250px;">
                         <div class="caption">
                             <h3>{{ meal.name }}</h3>
                             <p>{{ meal.description }}</p>
                             <p>
+                                <h6>Tags:</h6>
+                                <span style="font-style: italic">
+                                {% for tag in meal.tags %}
+                                    {{ tag.name }},
+                                {% endfor %}
+                                </span>
+                            </p>
+                            {% if app.user == restau.user %}
+                            <p>
                                 <a href="{{ path('edit_meal', {'id':meal.id } ) }}" class="btn btn-primary" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
                                 <a href="{{ path('delete_meal', {'id':meal.id}) }}" class="btn btn-danger" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</a></p>
                             </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

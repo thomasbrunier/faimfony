@@ -2,7 +2,9 @@
 
 namespace FaimfonyBundle\Controller;
 
+use FaimfonyBundle\Entity\Meal;
 use FaimfonyBundle\Entity\Restaurant;
+use FaimfonyBundle\Form\UserMealType;
 use FaimfonyBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,12 +20,24 @@ class UserController extends Controller
 
         $user = $this->getUser();
         $userId = $user->getId();
+        $meal = new Meal();
+        $form = $this->createForm(UserMealType::class, $meal);
+
 
         $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
         $restaus = $restauRepository->findByUser($userId);
 
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            dump($meal->getTags()[0]->getName());
+            $mealRepo = $this->getDoctrine()->getRepository(Meal::class);
+            $meals = $mealRepo->userFindMeal($meal->getPrice(), $meal->getTags());
 
-        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus));
+
+            return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'meals'=>$meals));
+        }
+
+        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView()));
     }
 
     /**
