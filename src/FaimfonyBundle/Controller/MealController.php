@@ -33,9 +33,9 @@ class MealController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($meal);
             $em->flush();
-            return $this->redirect($this->generateUrl('profil_restau', array('id'=>$restau->getId())));
+            return $this->redirect($this->generateUrl('profil_restau', array('user'=> $this->getUser(), 'id'=>$restau->getId())));
         }
-        return $this->render('FaimfonyBundle:Default:mealFormulaire.html.twig', array('form' => $form->createView()
+        return $this->render('FaimfonyBundle:Default:mealFormulaire.html.twig', array('user'=> $this->getUser(), 'form' => $form->createView()
         ));
     }
 
@@ -43,6 +43,7 @@ class MealController extends Controller
      * @Route("meal/edit/{id}", name="edit_meal")
      */
     public function mealEditAction(Request $request, $id){
+
         $meal = $this->getDoctrine()->getRepository(Meal::class)->find($id);
         $form = $this->createForm(MealType::class, $meal);
         $form->handleRequest($request);
@@ -51,9 +52,9 @@ class MealController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($meal);
             $em->flush();
-            return $this->redirect($this->generateUrl('edit_meal', array('id'=>$meal->getId())));
+            return $this->redirect($this->generateUrl('edit_meal', array('user'=> $this->getUser(),'id'=>$meal->getId())));
         }
-        return $this->render('FaimfonyBundle:Default:editMeal.html.twig', array('meal'=>$meal ,'form' => $form->createView()
+        return $this->render('FaimfonyBundle:Default:editMeal.html.twig', array('user'=> $this->getUser(),'meal'=>$meal ,'form' => $form->createView()
         ));
     }
 

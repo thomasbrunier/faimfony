@@ -29,7 +29,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            dump($meal->getTags()[1]->getName());
+//            dump($meal->getTags()[1]->getName());
             $mealRepo = $this->getDoctrine()->getRepository(Meal::class);
             $meals = $mealRepo->userFindMeal($meal->getPrice(), $meal->getTags());
 
