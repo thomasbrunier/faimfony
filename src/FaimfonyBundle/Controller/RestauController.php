@@ -19,7 +19,7 @@ class RestauController extends Controller
 
     public function restauAction(Request $request)
     {
-
+        $session = new Session();
         $restaurant = new Restaurant();
 
         $form = $this->CreateForm(RestaurantType::class, $restaurant);
@@ -41,6 +41,8 @@ class RestauController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($restaurant);
             $em->flush();
+            $session->getFlashBag()->add('notice', 'Votre restaurant a été ajouté avec succès!');
+            return $this->redirect($this->generateUrl('user_profil'));
         }
         return $this->render('FaimfonyBundle:Default:restaurantFormulaire.html.twig', array('form' => $form->createView()
         ));
@@ -88,6 +90,7 @@ class RestauController extends Controller
             'id' => $id,
             'userIsOwner' => $userIsOwner,
             'restau' => $restau,
+            'timetable'=> json_decode($restau->getTimetable(), true),
             'meals' => $meals
         ));
     }
@@ -95,7 +98,6 @@ class RestauController extends Controller
     /**
      * @Route("restaurant/edit/{id}", name="edit_restau")
      */
-
     public function restauEditAction(Request $request, $id)
     {
 
@@ -124,6 +126,25 @@ class RestauController extends Controller
 
 //        return $this->render('FaimfonyBundle:Default:restaurantFormulaire.html.twig', array('form' => $form->createView()
 //        ));
+    }
+    
+    /**
+     * @Route("restaurant/delete/{id}", name="delete_restau")
+     */
+    public function restauDeleteAction(Request $request, $id){
+        $session = new Session();
+        $user = $this->getUser();
+        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
+        if($user == $restaurant->getUser()){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($restaurant);
+            $em->flush();
+            $session->getFlashBag()->add('notice', 'Votre restaurant a été supprimé');
+            return $this->redirect($this->generateUrl('user_profil'));
+        }
+        else{
+            return $this->redirect($this->generateUrl('user_profil'));
+        }
     }
 
 

@@ -47,6 +47,7 @@ class Meal
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="meals")
      * @ORM\JoinTable(name="meals_tags")
+     *
      */
     protected $tags;
 

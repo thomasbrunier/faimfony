@@ -1,7 +1,7 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{% form_theme login_form 'bootstrap_3_layout.html.twig' %}
 
 {% block content %}
-
         <div class="row">
             <h2 class="page-header text-center">Connexion/Inscription</h2>
         </div>
@@ -11,6 +11,7 @@
                 <h3>J'ai déjà un compte !</h3>
                 {% include ":FOSUserBundle/views/Security:login.html.twig" %}
             </div>
+
             <div class="col-xs-12 col-md-6">
                 <h3>Je veux créer mon compte !</h3>
                 {{ form_start(login_form) }}

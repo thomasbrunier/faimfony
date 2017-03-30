@@ -11,4 +11,12 @@ namespace FaimfonyBundle\Repository;
 class MealRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function searchMeal($query)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.name LIKE :query')
+            ->setParameter('query', $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace FaimfonyBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,9 +30,13 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Meal", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Meal", mappedBy="tags")
      */
-    protected $meal;
+    protected $meals;
+
+    public function __construct(){
+        $this->meals = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -85,6 +90,64 @@ class Tag
      * Get meal
      *
      * @return \FaimfonyBundle\Entity\Meal
+     */
+    public function getMeals()
+    {
+        return $this->meals;
+    }
+
+    /**
+     * Add meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     *
+     * @return Tag
+     */
+    public function addMeals(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals[] = $meal;
+
+        return $this;
+    }
+
+    /**
+     * Remove meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     */
+    public function removeMeals(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals->removeElement($meal);
+    }
+
+    /**
+     * Add meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     *
+     * @return Tag
+     */
+    public function addMeal(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals[] = $meal;
+
+        return $this;
+    }
+
+    /**
+     * Remove meal
+     *
+     * @param \FaimfonyBundle\Entity\Meal $meal
+     */
+    public function removeMeal(\FaimfonyBundle\Entity\Meal $meal)
+    {
+        $this->meals->removeElement($meal);
+    }
+
+    /**
+     * Get meal
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMeal()
     {
