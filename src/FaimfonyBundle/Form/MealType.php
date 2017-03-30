@@ -20,9 +20,9 @@ class MealType extends AbstractType
         $builder
             ->add('name', TextType::class, array('label' => 'Nom du plat'))
             ->add('description', TextType::class, array('label' => 'Description du plat'))
-            ->add('price', MoneyType::class, array('label' => 'Prix du plat', 'divisor' => 100))
+            ->add('price', MoneyType::class, array('label' => 'Prix du plat'))
             ->add('tags', TagsType::class)
-            ->add('image', ImageType::class);
+            ->add('image', ImageType::class, array('required'=>false));
     }
 
     /**

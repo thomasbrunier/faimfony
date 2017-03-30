@@ -29,12 +29,14 @@ class UserMealType extends AbstractType
     {
         $min = $this->manager->getRepository('FaimfonyBundle:Meal')->minPriceMeal();
         $max = $this->manager->getRepository('FaimfonyBundle:Meal')->maxPriceMeal();
-
+        if($min == $max){
+            $min = [];
+        }
         $builder
             ->add('price', RangeType::class, array('label' => 'Quel est votre budget maximum?',
                 'attr' => array(
-                    'min' => $min[0]->getPrice(),
-                    'max' => $max[0]->getPrice(),
+                    'min' => (empty($min))?0:$min[0]->getPrice(),
+                    'max' => (empty($max))?50:$max[0]->getPrice(),
                 )
             ))
             ->add('tags', TagsType::class, array(
