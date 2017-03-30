@@ -45,9 +45,7 @@ class Meal
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="meals")
-     * @ORM\JoinTable(name="meals_tags")
-     *
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"persist"})
      */
     protected $tags;
 
@@ -70,7 +68,6 @@ class Meal
 
     function __construct()
     {
-        $this->tags = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -157,40 +154,6 @@ class Meal
     }
 
     /**
-     * Add tag
-     *
-     * @param \FaimfonyBundle\Entity\Tag $tag
-     *
-     * @return Meal
-     */
-    public function addTag(\FaimfonyBundle\Entity\Tag $tag)
-    {
-        $this->tags[] = $tag;
-
-        return $this;
-    }
-
-    /**
-     * Remove tag
-     *
-     * @param \FaimfonyBundle\Entity\Tag $tag
-     */
-    public function removeTag(\FaimfonyBundle\Entity\Tag $tag)
-    {
-        $this->tags->removeElement($tag);
-    }
-
-    /**
-     * Get tags
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
      * Add user
      *
      * @param \FaimfonyBundle\Entity\User $user
@@ -270,5 +233,39 @@ class Meal
     public function getRestaurant()
     {
         return $this->restaurant;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \FaimfonyBundle\Entity\Tag $tag
+     *
+     * @return Meal
+     */
+    public function addTag(\FaimfonyBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \FaimfonyBundle\Entity\Tag $tag
+     */
+    public function removeTag(\FaimfonyBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

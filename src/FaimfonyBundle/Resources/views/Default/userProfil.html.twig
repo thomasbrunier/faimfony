@@ -6,6 +6,25 @@
 
     <div class="block-search">
         <h2 class="page-header">J'ai faim!</h2>
+        {% if form is defined %}
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Je veux manger !</button>
+        {{ form_end(form) }}
+        {% else %}
+            <div class="row">
+                {% for meal in meals %}
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}"">
+                            <h4>{{ meal.name }}</h4>
+                            <p>{{ meal.description }}</p>
+                            <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="col-sm-12 input-group">
             <input id="search" type="text" autocomplete="off"  class="form-control" placeholder="Recherche de plat" aria-describedby="basic-addon2">
@@ -62,7 +81,16 @@
 
 {% block javascripts %}
 
-
+    <script>
+        $(function() {
+            $('#faimfonybundle_meal_price').after('<output></output>');
+            $('#faimfonybundle_meal_price').next().text('--'); // Valeur par défaut
+            $('#faimfonybundle_meal_price').on('input', function() {
+                var $set = $(this).val();
+                $(this).next().text($set+'€');
+            });
+        });
+    </script>
     <script>
         (function() {
 
