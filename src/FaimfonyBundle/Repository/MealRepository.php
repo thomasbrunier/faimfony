@@ -19,4 +19,35 @@ class MealRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function maxPriceMeal(){
+        $query = $this->createQueryBuilder('m');
+        $query->setMaxResults(1);
+        $query->orderBy('m.price', 'DESC');
+        return $query->getQuery()->getResult();
+    }
+
+    public function minPriceMeal(){
+        $query = $this->createQueryBuilder('m');
+        $query->setMaxResults(1);
+        $query->orderBy('m.price', 'ASC');
+        return $query->getQuery()->getResult();
+    }
+
+    public function userFindMeal($maxPrice, $tags){
+        $query = $this->createQueryBuilder('m');
+        $query->join('m.tags', 't')->addSelect('t');
+        $query->where('m.price <= :price')
+            ->setParameters(array(
+                'price' => $maxPrice,
+            ))
+            ->setMaxResults(3);
+        $orModule = $query->expr()->orX();
+        foreach ($tags as $tag){
+            $orModule->add($query->expr()->like('t.name', "'%".$tag->getName())."%'");
+        }
+        $query->andWhere($orModule);
+
+        return $query->getQuery()->getResult();
+    }
 }
