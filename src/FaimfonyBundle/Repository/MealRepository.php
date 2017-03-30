@@ -42,10 +42,8 @@ class MealRepository extends \Doctrine\ORM\EntityRepository
                 'price' => $maxPrice,
             ))
             ->setMaxResults(3);
-        $i = 0;
         $orModule = $query->expr()->orX();
         foreach ($tags as $tag){
-            $i++;
             $orModule->add($query->expr()->like('t.name', "'%".$tag->getName())."%'");
         }
         $query->andWhere($orModule);

@@ -25,8 +25,6 @@ class ImageType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'FaimfonyBundle\Entity\Image'
         ));
-        $resolver->setDefault('required', false);
-
     }
 
     /**
