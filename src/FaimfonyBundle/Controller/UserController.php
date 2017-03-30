@@ -48,7 +48,7 @@ class UserController extends Controller
         }
 
 
-        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user_form'=>$form->createView()));
+        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user'=>$user, 'user_form'=>$form->createView()));
     }
 
 

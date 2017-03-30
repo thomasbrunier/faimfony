@@ -44,7 +44,7 @@ class RestauController extends Controller
             $session->getFlashBag()->add('notice', 'Votre restaurant a été ajouté avec succès!');
             return $this->redirect($this->generateUrl('user_profil'));
         }
-        return $this->render('FaimfonyBundle:Default:restaurantFormulaire.html.twig', array('form' => $form->createView()
+        return $this->render('FaimfonyBundle:Default:restaurantFormulaire.html.twig', array('user'=>$user, 'form' => $form->createView()
         ));
     }
 
@@ -87,6 +87,7 @@ class RestauController extends Controller
         }
 
         return $this->render('FaimfonyBundle:Default:restauProfil.html.twig', array(
+            'user'=>$user,
             'id' => $id,
             'userIsOwner' => $userIsOwner,
             'restau' => $restau,
@@ -120,7 +121,7 @@ class RestauController extends Controller
         }
 
 
-        return $this->render('FaimfonyBundle:Default:editRestau.html.twig', array('restau_form'=>$form->createView(), 'restaurant'=>$restaurant));
+        return $this->render('FaimfonyBundle:Default:editRestau.html.twig', array('user'=>$user, 'restau_form'=>$form->createView(), 'restaurant'=>$restaurant));
 
 
 

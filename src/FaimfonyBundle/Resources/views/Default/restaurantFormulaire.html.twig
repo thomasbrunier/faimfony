@@ -1,11 +1,11 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
 
 {% block content %}
-    <h2 class="title title--xxl type-center">Ajout d'un restaurant</h2>
-    <div class="grid__column type-center grid--justify-center">
+    <h2 class="page-header">Ajout d'un restaurant</h2>
+    <div class="">
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="button button--filled button--primary type-center">Valider formulaire</button>
+        <button type="submit" class="btn btn-primary">Valider formulaire</button>
         {{ form_end(form) }}
 
     </div>

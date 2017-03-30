@@ -116,9 +116,9 @@ select {
 .inline_time {
     display: inline-block;
 }
-#faimfonybundle_user input{
-    margin:auto;
-}
+/*#faimfonybundle_user input{*/
+    /*margin:auto;*/
+/*}*/
 .button {
     margin-top:10px;
 }
@@ -139,6 +139,7 @@ select {
     margin-top: 30px;
     padding-top:30px;
     padding-bottom:30px;
+    border-top:5px solid #337ab7;
 }
 
 #mastFooter p {

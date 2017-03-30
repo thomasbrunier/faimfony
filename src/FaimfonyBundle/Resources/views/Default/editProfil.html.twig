@@ -1,28 +1,36 @@
 {% extends "FaimfonyBundle:Default:layout.html.twig" %}
+{#{% form_theme user_form 'bootstrap_3_layout.html.twig' %}#}
 
 {% block content %}
-    <h2 class="page-header text-center">Editer mon profil</h2>
 
-    <div class="block-options">
-        <a href="{{ path('user_profil') }}"><i class="fa fa-user" aria-hidden="true"></i></a>
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('admin') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>
-        {% endif %}
-    </div>
+    {#<div class="block-options">#}
+        {#<a href="{{ path('user_profil') }}"><i class="fa fa-user" aria-hidden="true"></i></a>#}
+        {#{% if is_granted('ROLE_ADMIN') %}#}
+            {#<a href="{{ path('admin') }}"><i class="fa fa-cog" aria-hidden="true"></i></a>#}
+        {#{% endif %}#}
+    {#</div>#}
 
-    <div class="text-center">
-        {% if app.session.flashBag.has('notice') %}
-            <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('notice') %}
-                {{ msg }}
-            {% endfor %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">Editer mon profil</h2>
+
+            <div class="">
+                {% if app.session.flashBag.has('notice') %}
+                    <div class="alert alert-success">
+                        {% for msg in app.session.flashBag.get('notice') %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {{ form_start(user_form) }}
+                {{ form_widget(user_form) }}
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                {{ form_end(user_form) }}
+
             </div>
-        {% endif %}
-        {{ form_start(user_form) }}
-            {{ form_widget(user_form) }}
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-        {{ form_end(user_form) }}
-
+        </div>
     </div>
+
+
 {% endblock %}
 
