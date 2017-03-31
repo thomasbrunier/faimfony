@@ -28,6 +28,7 @@ class UserController extends Controller
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+
             $mealRepo = $this->getDoctrine()->getRepository(Meal::class);
             $meals = $mealRepo->userFindMeal($meal->getPrice(), $meal->getTags());
 
@@ -59,7 +60,7 @@ class UserController extends Controller
         }
 
 
-        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user_form'=>$form->createView()));
+        return $this->render('FaimfonyBundle:Default:editProfil.html.twig', array('user'=>$user, 'user_form'=>$form->createView()));
     }
 
 

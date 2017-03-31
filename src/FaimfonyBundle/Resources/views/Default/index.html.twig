@@ -6,15 +6,10 @@
 
 {% block content %}
 
-    <section class="grid__column type-center section-first">
-        <div class="grid__column--12 grid--center">
-            <h1 class="title__Page--welcome">Bienvenue sur Faimfony !</h1>
-        </div>
 
-        <div class="grid__column type-center grid--justify-center">
-                <button id="button" class="button button--filled button--primary button--lg"><a href="{{ path('register_form') }}">J'ai faim</a></button>
-            <button id="button" class="button button--filled button--tertiary button--lg"><a href="{{ path('register_form') }}">Je cuisine</a></button>
-        </div>
-    </section>
+    <h1 class="page-header">Bienvenue sur Faimfony !</h1>
+
+
+    <a href="{{ path('register_form') }}" class="btn btn-danger btn-lg btn-block">Se connecter</a>
 
 {% endblock %}

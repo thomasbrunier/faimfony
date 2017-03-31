@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('user_profil') }}">Faimfony</a>
+                <a class="navbar-brand" href="{{ path('user_profil') }}"><i class="fa fa-cutlery" aria-hidden="true"></i> Faimfony</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,12 +42,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% block header %}
                         {% if app.user %}
-                        <li class="active"><a href="/profil">Profil <span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i> Mon compte</a></li>
+                            {#class="active"#}
+                        <li><a href="{{ path('user_profil') }}"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="{{ path('user_edit') }}"><i class="fa fa-user" aria-hidden="true"></i>{% if (user) %}   {{ user.getFirstname() }}{% endif %}</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <li><a href="{{ path('admin') }}"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
                         {% endif %}
-                            <li><a href="{{ logout_path('main') }}">Déconnexion</a></li>
+                            <li><a href="{{ logout_path('main') }}"><i class="fa fa-power-off" aria-hidden="true"></i></a></li>
                         {% endif %}
                     {% endblock %}
                 </ul>
@@ -66,7 +67,7 @@
     </div>
 </div>
 
-<div id="mastFooter" class="container-fluid bg-primary">
+<div id="mastFooter" class="container-fluid">
     <div class="container">
         <footer class="row">
             {% block footer %}

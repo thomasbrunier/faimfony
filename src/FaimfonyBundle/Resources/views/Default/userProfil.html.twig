@@ -2,7 +2,8 @@
 
 {% block content %}
 
-    <h1>Bienvenue {{ user.getFirstname() }}</h1>
+    {#<h1>Bienvenue {{ user.getFirstname() }}</h1>#}
+
     {% if app.session.flashBag.has('notice') %}
         <div class="alert alert-success">
             {% for msg in app.session.flashBag.get('notice') %}
@@ -10,6 +11,7 @@
             {% endfor %}
         </div>
     {% endif %}
+
     <div class="block-search">
         <h2 class="page-header">J'ai faim!</h2>
         {% if form is defined %}
