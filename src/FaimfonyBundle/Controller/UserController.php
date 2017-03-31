@@ -25,18 +25,20 @@ class UserController extends Controller
         $favorites = $user->getFavorites();
         $restauRepository = $this->getDoctrine()->getRepository(Restaurant::class);
         $restaus = $restauRepository->findByUser($userId);
+        $formSubmitted = false;
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
 
+            $formSubmitted = true;
             $mealRepo = $this->getDoctrine()->getRepository(Meal::class);
             $meals = $mealRepo->userFindMeal($meal->getPrice(), $meal->getTags());
 
 
-            return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'meals'=>$meals, 'favorites'=>$favorites));
+            return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView(), 'meals'=>$meals, 'favorites'=>$favorites, 'formSubmitted'=>$formSubmitted));
         }
 
-        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView(),'favorites'=>$favorites));
+        return $this->render('FaimfonyBundle:Default:userProfil.html.twig', array('user'=>$user, 'restaus'=>$restaus, 'form'=>$form->createView(), 'meals'=>'', 'favorites'=>$favorites, 'formSubmitted'=>$formSubmitted));
     }
 
     /**

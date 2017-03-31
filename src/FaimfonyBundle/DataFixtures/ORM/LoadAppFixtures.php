@@ -17,6 +17,10 @@ class LoadAppFixtures implements FixtureInterface {
 
         $timetable = "{\"lundi\":[\"10:00:00\",\"15:00:00\"],\"mardi\":[\"10:00:00\",\"15:00:00\"],\"mercredi\":[\"10:00:00\",\"15:00:00\"],\"jeudi\":[\"10:00:00\",\"15:00:00\"],\"vendredi\":[\"18:00:00\",\"23:00:00\"],\"samedi\":[\"18:00:00\",\"23:00:00\"],\"dimanche\":[\"10:00:00\",\"15:00:00\"]}";
 
+        $burgerTag = new Tag();
+        $burgerTag->setName('burger');
+        $manager->persist($burgerTag);
+
         $u = 1;
         while ($u <= 10) {
             $user = new User();
@@ -59,13 +63,17 @@ class LoadAppFixtures implements FixtureInterface {
                     $meal->setPrice('10');
                     $meal->setRestaurant($restau);
 
+                    if ($m == 2) {
+                        $meal->addTag($burgerTag);
+                    }
+
                     $t = 1;
-                    while ($t <= 3) {
+                    while ($t <= 2) {
                         $tag = new Tag();
                         $tag->setName('tag'.$u.$r.$m.$t);
                         $meal->addTag($tag);
-
                         $manager->persist($tag);
+
                         $t++;
                     }
 
