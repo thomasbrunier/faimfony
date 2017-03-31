@@ -14,12 +14,12 @@
 
     <div class="block-search">
         <h2 class="page-header">J'ai faim!</h2>
-        {% if form is defined %}
+        {#{% if form is defined %}#}
         {{ form_start(form) }}
-            {{ form_widget(form) }}
+        {{ form_widget(form) }}
         <button type="submit" class="btn btn-primary">Je veux manger !</button>
         {{ form_end(form) }}
-        {% else %}
+        {% if not meals is empty %}
             <div class="row">
                 {% for meal in meals %}
                     <div class="col-sm-6 col-md-4">
@@ -27,34 +27,63 @@
                             <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}"">
                             <h4>{{ meal.name }}</h4>
                             <p>{{ meal.description }}</p>
-                            <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
-                                {% if not meal in app.user.favorites %}
-                                    <a href="{{ path('add_favorite', {'id': meal.id} ) }}" style="background-color:#a0950a;border-color:#a0950a" class="btn btn-primary" role="button"><i class="fa fa-star" aria-hidden="true"></i> Ajouter aux favoris </a>
-                                {% endif %}
+                            <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}"
+                                  class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i>
+                                    Aller au restaurant !</a>
+                                {#{% if not meal in app.user.favorites %}#}
+                                <a href="{{ path('add_favorite', {'id': meal.id} ) }}"
+                                   style="background-color:#a0950a;border-color:#a0950a" class="btn btn-primary"
+                                   role="button"><i class="fa fa-star" aria-hidden="true"></i> Ajouter aux favoris </a>
+                                {#{% endif %}#}
                             </p>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+
+        {% else %}
+            {% if formSubmitted %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 class="text-danger">Aucun plat ne correspond à votre recherche</h3>
+                        <h4 class="lead">Devenez Cooker et proposez ce type de plat!</h4>
+                    </div>
+                </div>
+            {% endif %}
         {% endif %}
 
-        <div class="col-sm-12 input-group">
-            <input id="search" type="text" autocomplete="off"  class="form-control" placeholder="Recherche de plat" aria-describedby="basic-addon2">
-            <div id="results"></div>
-        </div>
-
     </div>
+
+    <div class="block-search-ajax">
+        <h2 class="page-header">Recherche instantanée</h2>
+        {#<input id="search" type="text" autocomplete="off" class="form-control" placeholder="Recherche de plat"#}
+               {#aria-describedby="basic-addon2">#}
+        {#<div id="results"></div>#}
+        {##}
+
+        <input id="searchTags" type="text" autocomplete="off" class="form-control" placeholder="Cherchez un tag..."
+               aria-describedby="basic-addon3">
+        <div id="tagsResults"></div>
+
+        <h3 class="small">Résultats</h3>
+        <div class="row">
+            <div id="mealsResults"></div>
+        </div>
+    </div>
+
     <div class="block-favoris">
         <h2 class="page-header">Mes favoris</h2>
         <div class="row">
             {% for meal in app.user.favorites %}
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}"">
+                        <img src="{{ asset(meal.image.url) }}" alt="{{ meal.image.alt }}">
                         <h4>{{ meal.name }}</h4>
                         <p>{{ meal.description }}</p>
-                        <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
-                            <a href="{{ path('delete_favorite', {'id': meal.id} ) }}" style="background-color:red;border-color:red;" class="btn btn-primary" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer le favoris</a>
+                        <p><a href="{{ path('profil_restau', {'id': meal.restaurant.id} ) }}" class="btn btn-primary"
+                              role="button"><i class="fa fa-car" aria-hidden="true"></i> Aller au restaurant !</a>
+                            <a href="{{ path('delete_favorite', {'id': meal.id} ) }}" class="btn btn-danger" role="button"><i
+                                        class="fa fa-times" aria-hidden="true"></i> Supprimer le favoris</a>
                         </p>
                     </div>
                 </div>
@@ -63,7 +92,7 @@
     </div>
     {% if user.getIsCooker() %}
         <div class="block-myrestaurants">
-            <h2 class="page-header">Mes restaurants</h2>
+            <h2 class="page-header">Mes restos</h2>
             {% if app.session.flashBag.has('notice') %}
                 <div class="alert alert-success">
                     {% for msg in app.session.flashBag.get('notice') %}
@@ -81,9 +110,12 @@
                             <div class="caption">
                                 <h3>{{ restau.name }}</h3>
                                 <p>...</p>
-                                <p><a href="{{ path('profil_restau', {'id': restau.id} ) }}" class="btn btn-primary" role="button"><i class="fa fa-eye" aria-hidden="true"></i> Voir</a>
-                                    <a href="{{ path('edit_restau', {'id':restau.id}) }}" class="btn btn-default" role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
-                                    <a href="{{ path('delete_restau', {'id':restau.id}) }}" class="btn btn-danger" role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</a></p>
+                                <p><a href="{{ path('profil_restau', {'id': restau.id} ) }}" class="btn btn-primary"
+                                      role="button"><i class="fa fa-eye" aria-hidden="true"></i> Voir</a>
+                                    <a href="{{ path('edit_restau', {'id':restau.id}) }}" class="btn btn-default"
+                                       role="button"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
+                                    <a href="{{ path('delete_restau', {'id':restau.id}) }}" class="btn btn-danger"
+                                       role="button"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</a></p>
                             </div>
                         </div>
                     </div>
@@ -91,7 +123,9 @@
                 {% endfor %}
 
                 <div class="col-sm-6 col-md-4">
-                    <a class="btn btn-default btn-lg btn-block" href="{{ path('add_restau') }}"><i class="fa fa-plus" aria-hidden="true"></i> Ajouter un resto</a>
+                    <a class="btn btn-default btn-lg btn-block" href="{{ path('add_restau') }}"><i class="fa fa-plus"
+                                                                                                   aria-hidden="true"></i>
+                        Ajouter un resto</a>
                 </div>
 
             </div>
@@ -103,32 +137,37 @@
 {% block javascripts %}
 
     <script>
-        $(function() {
-            $('#faimfonybundle_meal_price').after('<output></output>');
-            $('#faimfonybundle_meal_price').next().text('--'); // Valeur par défaut
-            $('#faimfonybundle_meal_price').on('input', function() {
+        $(function () {
+
+            var $budget = $('#faimfonybundle_meal_price');
+            var $set = $budget.val();
+
+            $budget.after('<output></output>');
+            $budget.next().text($set + '€'); // Valeur par défaut
+            $budget.on('input', function () {
                 var $set = $(this).val();
-                $(this).next().text($set+'€');
+                $(this).next().text($set + '€');
             });
         });
     </script>
     <script>
-        (function() {
+        (function () {
 
-            var searchElement = document.getElementById('search'),
-                    results = document.getElementById('results'),
+            var searchElement = document.getElementById('searchTags'),
+                    results = document.getElementById('tagsResults'),
+                    mealsResults = document.getElementById('mealsResults'),
                     selectedResult = -1, // Permet de savoir quel résultat est sélectionné : -1 signifie "aucune sélection"
                     previousRequest, // On stocke notre précédente requête dans cette variable
+                    previousMealRequest, // On stocke notre précédente requête dans cette variable
                     previousValue = searchElement.value; // On fait de même avec la précédente valeur
-
 
 
             function getResults(keywords) { // Effectue une requête et récupère les résultats
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', '{{ path('search') }}?s='+ encodeURIComponent(keywords));
+                xhr.open('GET', '{{ path('search_tags') }}?s=' + encodeURIComponent(keywords));
 
-                xhr.addEventListener('readystatechange', function() {
+                xhr.addEventListener('readystatechange', function () {
                     if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 
                         displayResults(JSON.parse(xhr.responseText));
@@ -142,6 +181,57 @@
 
             }
 
+
+            function getMealResults(budget, tag) { // Effectue une requête et récupère les résultats
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '{{ path('search_meal') }}?b=' + encodeURIComponent(budget) + '&t=' + encodeURIComponent(tag));
+
+                xhr.addEventListener('readystatechange', function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+
+                        displayMealResults(JSON.parse(xhr.responseText));
+
+                    }
+                });
+
+                xhr.send(null);
+
+                return xhr;
+
+            }
+
+            function displayMealResults(response) { // Affiche les résultats d'une requête
+
+                mealsResults.style.display = response.length ? 'block' : 'none'; // On cache le conteneur si on n'a pas de résultats
+
+                if (response.length) { // On ne modifie les résultats que si on en a obtenu
+                    var responseLen = response.length;
+
+                    mealsResults.innerHTML = ''; // On vide les résultats
+
+                    for (var i = 0, div; i < responseLen; i++) {
+
+                        $data = response[i];
+
+                        div = mealsResults.appendChild(document.createElement('div'));
+
+                        div.innerHTML = '<div class="col-md-4 col-xs-6"><div class="thumbnail"><img src="'+response[i]['photoUrl']+'" alt="img"><h4>'+response[i]['name']+'</h4><p>'+response[i]['desc']+'</p><p>'+response[i]['price']+'€</p></p></div></div>';
+
+//                        console.log(response[i]);
+//                        console.log('test');
+
+//                        div.addEventListener('click', function(e) {
+//                            chooseResult(e.target);
+//                        });
+
+                    }
+
+                }
+
+            }
+
+
             function displayResults(response) { // Affiche les résultats d'une requête
 
                 results.style.display = response.length ? 'block' : 'none'; // On cache le conteneur si on n'a pas de résultats
@@ -151,12 +241,12 @@
 
                     results.innerHTML = ''; // On vide les résultats
 
-                    for (var i = 0, div ; i < responseLen ; i++) {
+                    for (var i = 0, div; i < responseLen; i++) {
 
                         div = results.appendChild(document.createElement('div'));
                         div.innerHTML = response[i];
 
-                        div.addEventListener('click', function(e) {
+                        div.addEventListener('click', function (e) {
                             chooseResult(e.target);
                         });
 
@@ -177,8 +267,7 @@
             }
 
 
-
-            searchElement.addEventListener('keyup', function(e) {
+            searchElement.addEventListener('keyup', function (e) {
 
                 var divs = results.getElementsByTagName("div");
 
@@ -210,19 +299,29 @@
 
                 }
 
+
                 else if (searchElement.value != previousValue) { // Si le contenu du champ de recherche a changé
 
+
                     previousValue = searchElement.value;
+
 
                     if (previousRequest && previousRequest.readyState < XMLHttpRequest.DONE) {
                         previousRequest.abort(); // Si on a toujours une requête en cours, on l'arrête
                     }
+
+                    if (previousMealRequest && previousMealRequest.readyState < XMLHttpRequest.DONE) {
+                        previousMealRequest.abort(); // Si on a toujours une requête en cours, on l'arrête
+                    }
+
+                    previousMealRequest = getMealResults('15', previousValue); // On stocke la nouvelle requête
 
                     previousRequest = getResults(previousValue); // On stocke la nouvelle requête
 
                     selectedResult = -1; // On remet la sélection à "zéro" à chaque caractère écrit
 
                 }
+
 
             });
 

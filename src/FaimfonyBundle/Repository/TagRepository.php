@@ -10,4 +10,14 @@ namespace FaimfonyBundle\Repository;
  */
 class TagRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function searchTag($query)
+    {
+        return $this->createQueryBuilder('t')
+            ->where('t.name LIKE :query')
+            ->setParameter('query', $query . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

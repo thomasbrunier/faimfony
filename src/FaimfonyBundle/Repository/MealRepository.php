@@ -41,7 +41,7 @@ class MealRepository extends \Doctrine\ORM\EntityRepository
             ->setParameters(array(
                 'price' => $maxPrice,
             ))
-            ->setMaxResults(3);
+            ->setMaxResults(30);
         $orModule = $query->expr()->orX();
         if(!empty($tags)){
             foreach ($tags as $tag){
